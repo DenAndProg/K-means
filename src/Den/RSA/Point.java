@@ -4,65 +4,48 @@ import java.util.ArrayList;
 
 public class Point {
 
-    //private int[] colors = new int[3];    //[0] - red; [1] - green; [2] - blue
-    private double red;
-    private double green;
-    private double blue;
+    private double[] colors = new double[3];    //[0] - red; [1] - green; [2] - blue
     private int cluster;
 
-    public double getRed() {
-        return red;
+    public double[] getColors() {
+        return colors;
     }
-    public void setRed(double red) {
-        this.red = red;
+    public void setColors(double[] colors) {
+        this.colors = colors;
     }
-    public double getGreen() {
-        return green;
+
+    public double getColors2(int i){  // not good
+        if(i <= 3)
+        return colors[i];
+        else return 0;
     }
-    public double getBlue() {
-        return blue;
+    public void selColors2(double colors, int i){   //not good
+        this.colors[i] = colors;
     }
-    public void setBlue(double blue) {
-        this.blue = blue;
-    }
-    public int getCluster() {
-        return cluster;
-    }
+    public int getCluster() {return cluster;}
     public void setCluster(int cluster) {
         this.cluster = cluster;
     }
 
 
-   /* public int[] getColors() {
-        return colors;
-    }
-    public void setColors(int[] colors) {
-        this.colors = colors;
-    }*/
-
    public Point(double red, double green, double blue){
-        /*colors[0] = red;
+        colors[0] = red;
         colors[1] = green;
-        colors[2] = blue;*/
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
+        colors[2] = blue;
         cluster = 0;
     }
 
     public void showPoint(){
-        /*System.out.println("|Red " + colors[0] + " | |Green " + colors[1] + " | |Blue " + colors[2] +" |");*/
-        System.out.println("|Red " + red + " | |Green " + green + " | |Blue " + blue +" |");
+        System.out.println("|Red " + colors[0] + " | |Green " + colors[1] + " | |Blue " + colors[2] +" |");
     }
 
-    public void showClusters(ArrayList<Point> list, int centroids){
-       int[] clasters = new int[centroids];
+    public static void showClusters(ArrayList<Point> list, int centroids){
+       int[] clusters = new int[centroids];
         for (Point point : list) {
-            clasters[point.getCluster()]++;
-            System.out.println(point.getCluster());
+            clusters[point.getCluster()]++;
         }
         for(int i = 0; i < centroids; i++){
-            System.out.println("[" + i +"] >> " + clasters[i]);
+            System.out.println("[" + i +"] >> " + clusters[i]);
         }
     }
 }

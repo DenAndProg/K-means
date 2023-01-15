@@ -2,15 +2,17 @@ package Den.RSA;
 
 
 
+import org.w3c.dom.css.Counter;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+      //  long startTime = System.nanoTime();
         Scanner sc = new Scanner(System.in);
         System.out.println("Please write number of centroids: >>");
         int centroid = sc.nextInt();
@@ -22,8 +24,20 @@ public class Main {
         ArrayList<Point>centroids = new ArrayList<>();
 
         image.getImage(allPoint, centroids, centroid);
-        calculateDistinct.calculate(allPoint, centroids, centroid);
-        allPoint.get(35366).showClusters(allPoint, centroid);
 
+        for(int i = 0; i < 30; i++) {
+            calculateDistinct.calculate(allPoint, centroids, centroid);
+            Point.showClusters(allPoint, centroid);
+            CounterCentroids.counterOfMass(allPoint, centroids);
+        }
+        MakeImage.makeImage(allPoint, centroids);
+
+       // long endTime = System.nanoTime();
+
+        // получаем разницу между двумя значениями нано-времени
+      //  long timeElapsed = endTime - startTime;
+
+       // System.out.println("Execution time in nanoseconds: " + timeElapsed);
+        //System.out.println("Execution time in milliseconds: " + timeElapsed / 1000000);
     }
 }

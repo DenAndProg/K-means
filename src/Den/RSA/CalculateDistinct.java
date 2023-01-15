@@ -10,12 +10,9 @@ public class CalculateDistinct {
             double number = 0;
             double sum = 999999.0;
             for(int j = 0; j < centroids.size(); j++){
-                number  =   ((arrayPoint.get(i).getRed() - centroids.get(j).getRed()) *
-                            (arrayPoint.get(i).getRed() - centroids.get(j).getRed())) +
-                            ((arrayPoint.get(i).getGreen() - centroids.get(j).getGreen()) *
-                            (arrayPoint.get(i).getGreen() - centroids.get(j).getGreen())) +
-                            ((arrayPoint.get(i).getBlue() - centroids.get(j).getBlue()) *
-                            (arrayPoint.get(i).getBlue() - centroids.get(j).getBlue()));
+                for(int p = 0; p < 3; p++){
+                    number = number + Math.pow(arrayPoint.get(i).getColors2(p) - centroids.get(j).getColors2(p),2);
+                }
 
                 number = Math.sqrt(number);
                 if(number < sum){

@@ -11,7 +11,7 @@ public class Image {
 
     public void getImage(ArrayList<Point> arrayPoint, ArrayList<Point> centroids, int countCentroids){
 
-        File file = new File("C:/1p/Cat.jpg");
+        File file = new File("C:/1p/rr.jpg");
         if(file.exists()) System.out.println("Open");
 
         BufferedImage bufferedImage = null;
@@ -39,7 +39,8 @@ public class Image {
         }
 
         for(int i = 0; i < countCentroids; i++){   //to select the first centroids (need update)
-            centroids.add(arrayPoint.get(i));
+            double a = (int) 20 + Math.random() * 400;
+            centroids.add(arrayPoint.get((int) a));
         }
 
     }

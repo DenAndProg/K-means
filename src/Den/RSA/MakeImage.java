@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class MakeImage {
 
     public static void makeImage(ArrayList<Point> point, ArrayList<Point> cent) throws IOException {
-        File file = new File("C:/1p/rr.jpg");
+        File file = new File("C:/1p/111.jpg");
         if(file.exists()) System.out.println("Open");
 
         BufferedImage bufferedImage = null;
@@ -26,7 +26,9 @@ public class MakeImage {
 
         for(int x = 0; x < bufferedImage.getWidth(); x++) {
             for (int y = 0; y < bufferedImage.getHeight(); y++) {
-                Color newColor = new Color((int) cent.get(point.get(i).getCluster()).getColors2(0), (int) cent.get(point.get(i).getCluster()).getColors2(1), (int) cent.get(point.get(i).getCluster()).getColors2(2));
+                Color newColor = new Color((int) cent.get(point.get(i).getCluster()).getColorsFromArray(0),
+                        (int) cent.get(point.get(i).getCluster()).getColorsFromArray(1),
+                        (int) cent.get(point.get(i).getCluster()).getColorsFromArray(2));
                 i++;
                 result.setRGB(x,y,newColor.getRGB());
             }

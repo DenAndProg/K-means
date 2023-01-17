@@ -1,28 +1,50 @@
 package Den.RSA;
 
+import Den.RSA.Exception.IndexOutOfBoundsofArrayException;
+
 import java.util.ArrayList;
 
 public class Point {
 
-    private double[] colors = new double[3];    //[0] - red; [1] - green; [2] - blue
+    private double[] colors = new double[3];    //[0] - red; [1] - green; [2] - blue      <<--RGB-->>
     private int cluster;
+
 
     public double[] getColors() {
         return colors;
     }
     public void setColors(double[] colors) {
+
         this.colors = colors;
     }
 
-    public double getColors2(int i){  // not good
-        if(i <= 3)
-        return colors[i];
-        else return 0;
+    public double getColorsFromArray(int index){    //get color from array
+        try {
+            if (index < 0 || index >= 3)
+                throw new IndexOutOfBoundsofArrayException("Your index =" + index + " But can be only [0], [1], [2]");
+        }
+        catch (IndexOutOfBoundsofArrayException e){
+            e.printStackTrace();
+            return 0;
+        }
+        return colors[index];
     }
-    public void selColors2(double colors, int i){   //not good
-        this.colors[i] = colors;
+
+    public void selColorsInArray(double colors, int index){   //put color in array
+        try {
+            if (index < 0 || index >= 3)
+                throw new IndexOutOfBoundsofArrayException("Your index =" + index + " But can be only [0], [1], [2]");
+            else this.colors[index] = colors;
+        }
+        catch (IndexOutOfBoundsofArrayException e){
+            e.printStackTrace();
+        }
     }
-    public int getCluster() {return cluster;}
+
+
+    public int getCluster() {
+        return cluster;
+    }
     public void setCluster(int cluster) {
         this.cluster = cluster;
     }
@@ -36,7 +58,7 @@ public class Point {
     }
 
     public void showPoint(){
-        System.out.println("|Red " + colors[0] + " | |Green " + colors[1] + " | |Blue " + colors[2] +" |");
+        System.out.println("|Red " + colors[0] + " | |Green " + colors[1] + " | |Blue " + colors[2] +" | |Cluster " + cluster +" |");
     }
 
     public static void showClusters(ArrayList<Point> list, int centroids){
@@ -45,7 +67,7 @@ public class Point {
             clusters[point.getCluster()]++;
         }
         for(int i = 0; i < centroids; i++){
-            System.out.println("[" + i +"] >> " + clusters[i]);
+            System.out.println("[" + (i + 1) +"] >> " + clusters[i]);
         }
     }
 }

@@ -1,6 +1,7 @@
 package Den.RSA;
 
 import Den.RSA.Exception.NotFoundImageException;
+import Den.RSA.GlobalVariable.GlobalVariable;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,14 +12,17 @@ import java.util.ArrayList;
 
 public class Image {
 
-    public void getImage(ArrayList<Point> arrayPoint, ArrayList<Point> centroids, int countCentroids){
+    public void getImage(ArrayList<Point> arrayPoint, ArrayList<Point> centroids, int countCentroids, GlobalVariable variable){
+
         File file = null;
          try{
-        file = new File("C:/1p/1115.jpg");
-        if(file.exists()) System.out.println("Open");
-        else throw new NotFoundImageException("Not found Image");}
+        file = new File(variable.getNameOfDirective() + "/" + variable.getNameOfFile());
+        if(file.exists()) System.out.println("<***Open file***>");
+        else throw new NotFoundImageException("<***Not found Image***>");
+         }
         catch (NotFoundImageException e){
              e.printStackTrace();
+             return;
         }
 
         BufferedImage bufferedImage = null;
@@ -27,8 +31,9 @@ public class Image {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        assert bufferedImage != null;
+        if(bufferedImage.getWidth() != 0 && bufferedImage.getHeight() != 0)
+        variable.setWeightOfImage(bufferedImage.getWidth());   //save wight of image
+        variable.setHeightOfImage(bufferedImage.getHeight());  //save height of image
 
         for(int x = 0; x < bufferedImage.getWidth(); x++) {
             for (int y = 0; y < bufferedImage.getHeight(); y++) {

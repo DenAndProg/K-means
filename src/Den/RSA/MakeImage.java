@@ -1,5 +1,7 @@
 package Den.RSA;
 
+import Den.RSA.GlobalVariable.GlobalVariable;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,23 +11,18 @@ import java.util.ArrayList;
 
 public class MakeImage {
 
-    public static void makeImage(ArrayList<Point> point, ArrayList<Point> cent) throws IOException {
-        File file = new File("C:/1p/111.jpg");
-        if(file.exists()) System.out.println("Open");
+    public static void makeImage(ArrayList<Point> point,
+                                 ArrayList<Point> cent,
+                                 GlobalVariable variable) throws IOException {
 
-        BufferedImage bufferedImage = null;
-        try {
-            bufferedImage = ImageIO.read(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int size = bufferedImage.getHeight() * bufferedImage.getWidth();
-        assert bufferedImage != null;
-        BufferedImage result = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(), bufferedImage.getType());
+        BufferedImage result = new BufferedImage(variable.getWeightOfImage(),
+                                                 variable.getHeightOfImage(),
+                                                 variable.getType());
+
         int i = 0;
 
-        for(int x = 0; x < bufferedImage.getWidth(); x++) {
-            for (int y = 0; y < bufferedImage.getHeight(); y++) {
+        for(int x = 0; x < variable.getWeightOfImage(); x++) {
+            for (int y = 0; y < variable.getHeightOfImage(); y++) {
                 Color newColor = new Color((int) cent.get(point.get(i).getCluster()).getColorsFromArray(0),
                         (int) cent.get(point.get(i).getCluster()).getColorsFromArray(1),
                         (int) cent.get(point.get(i).getCluster()).getColorsFromArray(2));
@@ -35,9 +32,12 @@ public class MakeImage {
             }
 
 
-
-
-        File output = new File("C:/1p/Cat222.jpg");
+        File output = new File(variable.getNameOfDirective() + "/" + variable.getNameOfOutputFile());
+        if(output.createNewFile()){
+            System.out.println("<***File " + variable.getNameOfOutputFile() + " is created***>");
+        }
+        else
+            System.out.println("<***File " + variable.getNameOfOutputFile() + " is exist***>");
         ImageIO.write(result, "jpg", output);
     }
 

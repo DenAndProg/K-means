@@ -18,13 +18,12 @@ public class CalculateDistinct {
                 }
 
                 number = Math.sqrt(number);
+
                 if(number < sum){
                     sum = number;
                     arrayPoint.get(point).setCluster(centroid);
                 }
             }
-
         }
-
     }
 }

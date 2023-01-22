@@ -1,19 +1,14 @@
 package Den.RSA;
 
-
-
 import Den.RSA.GlobalVariable.GlobalVariable;
-import org.w3c.dom.css.Counter;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        long startTime = System.nanoTime();
+
 
         GlobalVariable globalVariable = new GlobalVariable();
         Image image = new Image();
@@ -21,17 +16,20 @@ public class Main {
 
         globalVariable.GetInformationOfImage();
 
+        long startTime = System.nanoTime();
         ArrayList<Point>allPoint = new ArrayList<>();
         ArrayList<Point>centroids = new ArrayList<>();
+        ArrayList<Point>allPoint2 = new ArrayList<>();
 
         image.getImage(allPoint, centroids, globalVariable.getCountOfCluster(), globalVariable);
 
-        for(int i = 0; i < 30; i++) {
+        allPoint2.addAll(allPoint);
+        for(int i = 0; i < globalVariable.getIteration(); i++) {
             calculateDistinct.calculate(allPoint, centroids);
-            Point.showClusters(allPoint, globalVariable.getCountOfCluster());
             CounterCentroids.counterOfMass(allPoint, centroids);
         }
-        MakeImage.makeImage(allPoint, centroids);
+        Point.showClusters(allPoint, globalVariable.getCountOfCluster());
+        MakeImage.makeImage(allPoint, centroids, globalVariable);
 
 
         long endTime = System.nanoTime();

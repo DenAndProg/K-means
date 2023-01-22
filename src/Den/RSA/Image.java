@@ -12,9 +12,12 @@ import java.util.ArrayList;
 
 public class Image {
 
-    public void getImage(ArrayList<Point> arrayPoint, ArrayList<Point> centroids, int countCentroids, GlobalVariable variable){
+    public void getImage(ArrayList<Point> arrayPoint,
+                         ArrayList<Point> centroids,
+                         int countCentroids,
+                         GlobalVariable variable){
 
-        File file = null;
+        File file;
          try{
         file = new File(variable.getNameOfDirective() + "/" + variable.getNameOfFile());
         if(file.exists()) System.out.println("<***Open file***>");
@@ -28,12 +31,18 @@ public class Image {
         BufferedImage bufferedImage = null;
         try {
             bufferedImage = ImageIO.read(file);
-        } catch (IOException e) {
+        } catch (IOException e ) {
             e.printStackTrace();
         }
+
+
+        assert bufferedImage != null;
+
         if(bufferedImage.getWidth() != 0 && bufferedImage.getHeight() != 0)
         variable.setWeightOfImage(bufferedImage.getWidth());   //save wight of image
         variable.setHeightOfImage(bufferedImage.getHeight());  //save height of image
+
+        variable.setType(bufferedImage.getType());
 
         for(int x = 0; x < bufferedImage.getWidth(); x++) {
             for (int y = 0; y < bufferedImage.getHeight(); y++) {
@@ -51,7 +60,7 @@ public class Image {
         }
 
         for(int i = 0; i < countCentroids; i++){   //to select the first centroids (need update)
-            double a = (int) 20 + Math.random() * 400;
+            double a = 20 + Math.random() * 400;
             centroids.add(arrayPoint.get((int) a));
         }
 

@@ -10,6 +10,20 @@ public class GlobalVariable {
     private String nameOfDirective;
     private String nameOfOutputFile;
     private int countOfCluster;
+    private int type;
+    private int iteration;
+
+    public int getIteration(){
+        return iteration;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public int getHeightOfImage() {
         return heightOfImage;
@@ -51,12 +65,14 @@ public class GlobalVariable {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Please write number of centroids: >>");
-        countOfCluster = sc.nextInt();
+        countOfCluster = sc.nextInt(); sc.nextLine();
         System.out.print("\nPlease write a directive: >>");
         nameOfDirective = sc.nextLine();
-        System.out.print("\nPlease write a name of file with format(.jpeg): >>");
+        System.out.print("\nPlease write a name of file with format(.jpg): >>");
         nameOfFile = sc.nextLine();
         System.out.print("\nPlease write a output name of file with format: >>");
         nameOfOutputFile = sc.nextLine();
+        System.out.print("\nPlease write count of iteration: >>");
+        iteration = sc.nextInt(); sc.nextLine();
     }
 }

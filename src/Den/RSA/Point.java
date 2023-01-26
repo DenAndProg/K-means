@@ -30,7 +30,7 @@ public class Point {
         return colors[index];
     }
 
-    public void selColorsInArray(double colors, int index){   //put color in array
+    public void setColorsInArray(double colors, int index){   //put color in array
         try {
             if (index < 0 || index >= 3)
                 throw new IndexOutOfBoundsofArrayException("Your index =" + index + " But can be only [0], [1], [2]");
